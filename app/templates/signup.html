@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>AuctionBits</title>
+
+    <!-- Font Icon -->
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}"
+    />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <script>
+    function isPassStrong() {
+      let pass = document.querySelector("#pass").value;
+      let strongPassword = new RegExp(
+        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+      );
+      return strongPassword.test(pass);
+    }
+    function passChanged() {
+      if (!isPassStrong()) {
+        let warning = document.querySelector("#passweak");
+        warning.style.visibility = "visible";
+      } else {
+        let warning = document.querySelector("#passweak");
+        warning.style.visibility = "hidden";
+      }
+    }
+  </script>
+
+  <body>
+    <div class="main">
+      <!-- Sign up form -->
+      <section class="signup">
+        <div class="container">
+          <div class="signup-content">
+            <div class="signup-form">
+              <h2 class="form-title">Sign up</h2>
+
+              <form method="POST" class="register-form" id="register-form">
+                {% if passweak %}
+                <span style="color: red; padding: 3px; font-size: 20px"
+                  >পাসওয়ার্ড অনেক দুর্বল । কঠিন পাসওয়ার্ড দিন ।</span
+                >
+                {% endif %} {% csrf_token %}
+                <div class="form-group">
+                  <label for="name"
+                    ><i class="zmdi zmdi-account material-icons-name"></i
+                  ></label>
+                  <input
+                    required
+                    type="text"
+                    name="username"
+                    id="name"
+                    placeholder="Your Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email"><i class="zmdi zmdi-email"></i></label>
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Your Email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                  <input
+                    required
+                    type="password"
+                    name="password"
+                    id="pass"
+                    placeholder="Password"
+                    onInput="passChanged()"
+                  />
+                </div>
+                <span
+                  id="passweak"
+                  style="color: red; padding: 3px; visibility: hidden"
+                  >Password too weak. Password must be at least 8 characters.
+                  Password must contain one uppercase, one lowercase, one
+                  special character and one number.</span
+                >
+
+                <div class="form-group form-button">
+                  <input
+                    type="submit"
+                    name="signup"
+                    id="signup"
+                    class="form-submit"
+                    value="Register"
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="signup-image">
+              <figure>
+                <img
+                  src="{% static 'images/signup-image.jpg' %}"
+                  alt="sing up image"
+                />
+              </figure>
+              <a href="/login" class="signup-image-link">I am already member</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- JS -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>auctionBits</title>
+</head>
+<body>
+    
+
+<div class="login">
+        <div class="container">
+            <div class="parentlogin">
+                <form action="" method="POST" enctype="multipart/form-data"> 
+                    <div class="title">
+                        <h1>SignUp</h1>
+                        <div class="icon">
+                            <div class="social"> <a href="#" class="social-icon"><span class="fa fa-facebook"></span></a></div>
+                            <div class="social">   <a href="#" class="social-icon"><span class="fa fa-twitter"></span></a></div>
+                        </div>
+                    </div>
+                    <label class="label" for="name">Username</label>
+                    <input type="text" placeholder="username" name="username"  required>
+                    <label class="label" for="email">Email</label>
+                    <input type="email" placeholder="email" name="email"  required>
+                    <label class="label" for="password">Password</label>
+                    <input type="password" placeholder="password" name="password"  required>
+                    <label class="label" for="confirm password">Confirm Password</label>
+                    <input type="password" placeholder="confirm password" name="cpassword"  required>
+                    <label class="label" for="contact">Contact No</label>
+                    <input type="text" placeholder="ContactNo" name="contact"  required>
+                    <label class="label" for="designation">Designation</label>
+                    <input type="text" placeholder="Designation" name="designation"  required>
+                    <input type="submit" name="submit" class="submit" value="Sign In" >
+                    <div class="extra">
+                        <div class="checkbox">
+                        <label><input type="checkbox" checked /> Remember me</label>
+                        </div>
+                        <div class="forget">
+                        <a href="#">Forgot Password</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="parentdesc">
+                <div class="description">
+                    <h2>Welcome To SignUp</h2>
+                    <p>Already have an account?</p>
+                    <a href="../Login/Bidder.php">Sign In</a>
+                 </div>
+              </div>
+        </div>
+
+     </div>
+
+    </body>
+    </html> -->

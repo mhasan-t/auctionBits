@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AuctionBits</title>
+  <link rel="stylesheet" href="{% static 'css/mainstyle.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mainstyle9.css' %}">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+
+  <style>
+    .product-container-abc  *{
+      max-width : 400px;
+      display:flex;
+      justify-content :center;
+      align-items :center;
+      {% comment %} width : 200px; {% endcomment %}
+    }
+
+    .all-products-container {
+      display :flex;
+      justify-content : center;
+      align-items : center;
+      gap : 30px;
+    }
+
+
+
+    input[type=text], select, textarea {
+        width: 100%; /* Full width */
+        padding: 12px; /* Some padding */ 
+        border: 1px solid #ccc; /* Gray border */
+        border-radius: 4px; /* Rounded borders */
+        box-sizing: border-box; /* Make sure that padding and width stays in place */
+        margin-top: 6px; /* Add a top margin */
+        margin-bottom: 16px; /* Bottom margin */
+        resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+      }
+      
+      /* Style the submit button with a specific background color etc */
+      input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      /* When moving the mouse over the submit button, add a darker green color */
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+  </style>
+
+</head>
+<body>
+  <div class="wrapper">
+    <nav>
+      <input type="checkbox" id="show-search">
+      <input type="checkbox" id="show-menu">
+      <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+      <div class="content">
+      <div class="logo">Auction Bits</div>
+        <ul class="links">
+          <li><a href="{% url 'view-prods' %}">Home</a></li>
+          <li><a href="">About</a></li>
+          {% comment %} <li>
+            <a href="#" class="desktop-link">Features</a>
+            <input type="checkbox" id="show-features">
+            <label for="show-features">Features</label>
+          </li> {% endcomment %}
+          <li><a href="{% url 'add-prods' %}">Add Product</a></li>
+
+          {% comment %} <li><a href="">My Cart</a></li> {% endcomment %}
+          <li><a href="/logout">Logout</a></li>
+		 
+        </ul>
+      </div>
+      <label for="show-search" class="search-icon"><i class="fas fa-search">Search</i></label>
+      <form action="" class="search-box" method="POST">
+        <input type="text" placeholder="Search by Name or Category..." name="khoj" required>
+        <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button>
+      </form>
+    </nav>
+  </div>
+
+
+  
+
+
+<div class="hehe">
+  <br><br><br><br><br>
+
+
+</div>
+  <div class="all-products-container"> 
+      <div class="product-container-abc">
+                <div class="product-name"><h4>Product ID : {{ product.id }} </h4> </div>
+                <div class="product-name"><h4>Name : {{ product.name }} </h4> </div>
+                <div class="product-writer font-weight-bold"> Description : <h5>  {{ product.desc }} </h5> </div>
+                <div class="text-secondary text-uppercase"> Category : <Strong>  {{ product.category }} </Strong> </div>
+                <div class="product-name"><h4>Starting Price : {{ product.price }} </h4> </div>
+                <div class="product-name"><h4>Maximum Bid : {{ max_bid.bid_price }} </h4> </div>
+
+                <img src="{{ product.image.url }}" alt="">
+
+                {% if not expired %}
+                    <div>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <label for="bp">Your Bid : </label>
+                            <input type="text" id="bp" name="bidp" placeholder="Bid Amount">
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                {% elif expired %}
+                    <span>AUCTION ENDED</span>
+                {% endif %}
+                
+        </div>
+    </div>
+
+	<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/62879e9c7b967b11799067ce/1g3gs75rh';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+    </body>
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	{% comment %} <footer class="content-footer">
+    <p>Say hi to me on these social networks:</p>
+      <ul class="social">
+        
+      <a href="https://github.com/salehakramjoy"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://www.facebook.com/salehakram.joy/"><i class="fa fa-facebook-square fa-3x"></i></a>
+      <a href="https://twitter.com/joysaleh1"><i class="fa fa-twitter-square fa-3x"></i></a>
+      <a href="https://www.linkedin.com/in/saleh-akram-joy-168118168/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      </ul>
+    <p>Devlop By <a href="https://salehakram.xyz">Auction Bits Team</a></p>
+  </footer> {% endcomment %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
+
+
+
+
+
+
+
+</html>

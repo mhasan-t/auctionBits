@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuctionBits</title>
+
+    <style>
+      .parentlogin {
+        height: 100vh;
+        width: 100vw;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      form {
+        position: static;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="view">
+      <div class="container">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="parentlogin">
+          <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="title">
+              <h1>2FA Code</h1>
+              <div class="icon">
+                <div class="social">
+                  <a href="#" class="social-icon"
+                    ><span class="fa fa-facebook"></span
+                  ></a>
+                </div>
+                <div class="social">
+                  <a href="#" class="social-icon"
+                    ><span class="fa fa-twitter"></span
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <input
+              type="text"
+              placeholder="Verification code"
+              name="2facode"
+              required
+            />
+            <input type="submit" name="submit" class="submit" value="Verify" />
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
